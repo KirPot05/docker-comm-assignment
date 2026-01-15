@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 
+const API_BASE = import.meta.env.VITE_API_BASE || "/api";
+
 export default function App() {
   const [data, setData] = useState(null);
   const [err, setErr] = useState("");
 
   useEffect(() => {
     // Iteration 1: browser calls host-published API
-    fetch("http://localhost:8000/predict")
+    fetch(`${API_BASE}/predict`)
       .then((r) => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();
@@ -22,7 +24,7 @@ export default function App() {
       <p>
         Frontend: <code>http://localhost:3000</code>
         <br />
-        API: <code>http://localhost:8000</code>
+        API: <code>{API_BASE}</code>
       </p>
 
       {err && <pre style={{ color: "crimson" }}>{err}</pre>}
