@@ -27,8 +27,8 @@ For a deeper dive into the architecture and configuration details, see [context/
 Before you begin, ensure you have met the following requirements:
 
 - **Docker** is installed and running.
-    - For Desktop: [Download Docker Desktop](https://www.docker.com/products/docker-desktop)
-    - For Servers/VMs: Ensure Docker Engine and Docker CLI are installed.
+  - For Desktop: [Download Docker Desktop](https://www.docker.com/products/docker-desktop)
+  - For Servers/VMs: Ensure Docker Engine and Docker CLI are installed in the system.
 - **Git** is installed.
 
 ## 📂 Project Structure
@@ -94,6 +94,7 @@ To stop and remove all containers, images, and networks created by this project:
 **Docker connection issues**
 
 > If commands fail, ensure the Docker daemon is running and accessible:
+>
 > ```bash
 > docker --version
 > docker info
