@@ -1,0 +1,33 @@
+graph TD
+    subgraph Host_Machine
+        Browser[Browser]
+    end
+
+    subgraph Docker_Network
+        subgraph Backend_Container ["Backend Container (Python 3.11)"]
+            FastAPI[FastAPI App]
+            Uvicorn[Uvicorn Server]
+            FastAPI -->|Runs on| Uvicorn
+            Uvicorn -->|Exposes| Port8000[Port 8000]
+        end
+
+        subgraph Frontend_Container ["Frontend Container (Nginx)"]
+            Nginx[Nginx Server]
+            ReactAssets[React Static Mode Assets]
+            Nginx -->|Serves| ReactAssets
+            Nginx -->|Exposes| Port80[Port 80]
+        end
+    end
+
+    Browser -->|HTTP Request http://localhost:3000| Port80
+    Browser -->|API Request http://localhost:8000| Port8000
+
+    %% Notes
+    Port80 -.->|Mapped to Host Port 3000| Browser
+    Port8000 -.->|Mapped to Host Port 8000| Browser
+
+    classDef container fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
+    classDef browser fill:#fff3e0,stroke:#e65100,stroke-width:2px;
+    
+    class Backend_Container,Frontend_Container container;
+    class Browser browser;
