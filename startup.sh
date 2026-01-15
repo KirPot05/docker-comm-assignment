@@ -1,8 +1,8 @@
 #!/bin/sh
 set -e
 
-BACKEND_IMAGE="demo-backend:1"
-FRONTEND_IMAGE="demo-frontend:1"
+BACKEND_IMAGE="demo-backend:v1"
+FRONTEND_IMAGE="demo-frontend:v1"
 
 BACKEND_CONTAINER="demo-backend"
 FRONTEND_CONTAINER="demo-frontend"
