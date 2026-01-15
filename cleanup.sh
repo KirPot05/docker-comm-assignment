@@ -1,9 +1,15 @@
 #!/bin/sh
+set -e
 
-echo "Cleaning up existing containers"
-docker rm -f demo-backend demo-frontend 2>/dev/null || true
+PROJECT_PREFIX="demo"
 
-echo "Removing existing images"
-docker rmi demo-backend:v1 demo-frontend:v1 2>/dev/null || true
+echo "Stopping and removing containers..."
+docker ps -a --filter "name=${PROJECT_PREFIX}-" --format "{{.ID}}" | xargs -r docker rm -f
 
-echo "Cleanup completed."
+echo "Removing images for project..."
+docker images --format "{{.Repository}}:{{.Tag}} {{.ID}}" \
+  | grep "^${PROJECT_PREFIX}-" \
+  | awk '{print $2}' \
+  | xargs -r docker rmi -f
+
+echo "Cleanup completed successfully."
